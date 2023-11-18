@@ -2,41 +2,30 @@
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
+# Monitor amd gamma
 bspc monitor -d 1 2 3 4 5 6 7 8
+xgamma -gamma 0.8
 
-#bspc monitor -d I II III IV V VI VII VIII IX X
-
-# Autorun
-$HOME/.config/polybar/launch.sh
-setxkbmap -layout us,ru -option grp:alt_shift_toggle
-sh ~/.fehbg &
-numlockx &
-
-# picom shinvidia (nvidia)
-killall picom 2>/dev/null
-picom -b --backend glx --vsync --xrender-sync-fence --glx-no-rebind-pixmap --use-damage --glx-no-stencil
-
-#nm-applet
-killall nm-applet 2>/dev/null
-nm-applet &
-killall xfce-polkit 2>/dev/null
-/usr/lib/xfce-polkit/xfce-polkit &
-
-
+# Rules window bspwm
 bspc config border_width         2
-bspc config window_gap          10
+bspc config window_gap           6
 
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-bspc rule -a Krita desktop='^5' state=floating follow=on
-bspc rule -a SimpleScreenRecorder state=floating
 bspc rule -a Chromium desktop='^1'
-bspc rule -a discord desktop='^2' focus=off
-#bspc rule -a telegram desktop='^3' 
-bspc rule -a 'Steam' desktop='^3' focus=off
-bspc rule -a mplayer2 state=floating
-bspc rule -a Kupfer.py focus=on
+bspc rule -a 'discord' desktop='^2' focus=off
+bspc rule -a 'steam' desktop='^3' focus=off
+
+# kill new run polybar
+killall picom 2>/dev/null
+
+# Custom command
+sh ~/.fehbg &
+$HOME/.config/polybar/launch.sh
+setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle
+numlockx
+picom --vsync
 
 export _JAVA_AWT_WM_NONREPARENTING=1
