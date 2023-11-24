@@ -125,5 +125,5 @@ super + x
 	betterlockscreen -l dim
 
 # flameshot
-Print
+@Print
 	flameshot gui
